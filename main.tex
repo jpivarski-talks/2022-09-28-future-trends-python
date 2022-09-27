@@ -56,9 +56,93 @@
 
 % START START START START START START START START START START START START START
 
-\begin{frame}{First slide}
-\vspace{0.5 cm}
-HERE
+\begin{frame}{Something I want to address in this talk}
+\vspace{0.1 cm}
+\begin{center}
+\only<1>{\includegraphics[width=0.85\linewidth]{PLOTS/indico-future2022.png}}\only<2>{\includegraphics[width=0.85\linewidth]{PLOTS/indico-hllhc2021.png}}\only<3>{\includegraphics[width=0.85\linewidth]{PLOTS/indico-roundtable2018.png}}\only<4>{\includegraphics[width=0.85\linewidth]{PLOTS/indico-chep2018.png}}
+\end{center}
 \end{frame}
+
+\begin{frame}{\mbox{ }}
+\Large
+It might be an efficient way to summarize all the analysis activities:
+\begin{center}
+Python $\bigcup$ ROOT.
+\end{center}
+
+\vspace{1 cm}
+\uncover<2->{But sometimes people read into it an implicit ``versus.''}
+\end{frame}
+
+\begin{frame}{\mbox{ }}
+\Large
+\vspace{0.25 cm}
+ROOT has had a Python interface since 2004.
+
+\vspace{0.2 cm}
+\begin{itemize}
+\item<2-> PyROOT is old enough to vote!
+\end{itemize}
+
+\vspace{1.25 cm}
+\begin{uncoverenv}<3->
+What the rest of us are trying to do is not strictly ``Python.''
+\vspace{0.2 cm}
+\begin{itemize}
+\item<4-> We've tried to characterize it as ``industry'' or ``data science,'' but still not right.
+\end{itemize}
+\end{uncoverenv}
+\end{frame}
+
+\begin{frame}{\mbox{ }}
+\Large
+What we're trying to talk about here is a social trend, and we're using a programming language as a proxy for it.
+\end{frame}
+
+\begin{frame}{Analysis of 11\,635 GitHub repos created by 2\,172 physicists}
+\vspace{0.25 cm}
+
+Software for the CMS experiment is on GitHub and all CMS physicists need to fork it. Using that, we can identify all of those physicists' non-fork, public repositories.
+
+\vspace{0.2 cm}
+
+\includegraphics[width=\linewidth]{PLOTS/gihub-language-fullstudy.pdf}
+\end{frame}
+
+\begin{frame}{Analysis of 11\,635 GitHub repos created by 2\,172 physicists}
+\vspace{0.25 cm}
+
+By regex searching for ``\mintinline{python}{import [A-Za-z_][A-Za-z_0-9]*}'' etc., we can count the number of physicist repositories that use different packages over time.
+
+\vspace{0.2 cm}
+
+\includegraphics[width=\linewidth]{PLOTS/gihub-package-fullstudy.pdf}
+\end{frame}
+
+\begin{frame}[fragile]{\mbox{ }}
+\Large
+There is a rise in Python usage (including PyROOT).
+
+\vspace{1.5 cm}
+\begin{uncoverenv}<2->
+But the biggest thing that happened in the past 5 years is
+
+\begin{center}
+\begin{minipage}{3.5 cm}
+\begin{minted}{python}
+import numpy
+\end{minted}
+\end{minipage}
+\end{center}
+
+\vspace{0.2 cm}
+What we're really getting at is using data analysis tools developed by scientists from other fields, the Big Data industry, quants, \dots
+\end{uncoverenv}
+\end{frame}
+
+
+
+
+
 
 \end{document}
