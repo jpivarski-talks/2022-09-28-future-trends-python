@@ -179,7 +179,118 @@ Regex matches to all Computing in High Energy Physics (CHEP) titles and abstract
 \end{columns}
 \end{frame}
 
+\begin{frame}{\mbox{ }}
+\Large
+Probably prompted by outside machine learning developments, particle physicists are now mixing tools from other fields into their analyses.
+\end{frame}
 
+\begin{frame}{But they are using C++ {\it and} Python, ROOT {\it and} other toolkits}
+\vspace{0.25 cm}
+Again, from the PyHEP 2020 survey ($N = 406$):
 
+\begin{columns}
+\column{1.1\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/pyhep2020-survey-5.pdf}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Mood in the community is for inclusiveness, too}
+\vspace{0.5 cm}
+\begin{columns}
+\column{1.05\linewidth}
+From the PyHEP 2022 Slack:
+
+\vspace{0.15 cm}
+\begin{itemize}\setlength{\itemsep}{0.25 cm}
+\item ``Is the scikit-hep collection already a complete replacement for the traditional ROOT approach? \ldots\ I would love to mostly avoid ROOT.''
+
+\item ``The goal is not to replace ROOT but to provide alternative analysis styles that can be complimentary for the work you want to do. So I don't think anyone wants to try to reimpliment {\it everything} ROOT does, but LHCb has done an entire analysis using only Scikit-HEP tools: \textcolor{blue}{\url{https://inspirehep.net/literature/1889335}}
+
+\textcolor{blue}{\url{https://indico.cern.ch/event/1126109/contributions/4780169}}''
+
+\item ``But let me stress is once more as these matters come often. The whole ecosystem can do a lot in various ways, and indeed ROOT and Scikit-HEP take different routes/philosophies. But they are alternative approaches, not replacements. In the end we all win by having several approaches/packages.''
+\end{itemize}
+
+\vspace{0.25 cm}
+(Lots of eyes, hearts, thumbs-up, smiles, etc.)
+\end{columns}
+\end{frame}
+
+\begin{frame}{\mbox{ }}
+\Large
+But that doesn't mean that we {\it avoid} overlaps with ROOT or only bridge ROOT functionality to the outside world.
+
+\vspace{1 cm}
+\begin{uncoverenv}<2->
+We add particle physics functionality to the scientific Python ecosystem in a Pythonic way:
+
+\begin{itemize}
+\item<3-> following Python conventions and practices (as they evolve)
+\item<4-> share data between packages by referencing arrays
+\item<5-> preference for small-scoped, cooperating packages
+\end{itemize}
+\end{uncoverenv}
+\end{frame}
+
+\begin{frame}{This is our model: pieces that can be plugged together}
+\vspace{0.75 cm}
+\Large
+
+\begin{columns}
+\column{0.55\linewidth}
+\begin{uncoverenv}<1->
+\mbox{ } \hfill Scientific Python ecosystem \hfill \mbox{ }
+
+\includegraphics[width=\linewidth]{PLOTS/shells-border.png}
+\end{uncoverenv}
+
+\column{0.55\linewidth}
+\begin{uncoverenv}<2->
+\mbox{ } \hfill Scikit-HEP ecosystem \hfill \mbox{ }
+
+\includegraphics[width=\linewidth]{PLOTS/shells-hep.pdf}
+\end{uncoverenv}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Since we started, packages grew in popularity {\it and number}}
+\vspace{0.35 cm}
+
+Download rates of Scikit-HEP packages (on Mac \& Windows: no batch jobs)
+
+\only<1>{\includegraphics[width=\linewidth]{PLOTS/pip-macwin-scikithep-log-for-report-0.pdf}}\only<2>{\includegraphics[width=\linewidth]{PLOTS/pip-macwin-scikithep-log-for-report.pdf}}
+\end{frame}
+
+\begin{frame}{\mbox{ }}
+\begin{columns}[t]
+\column{0.5\linewidth}
+\underline{\large Advantages of small packages}
+
+\vspace{0.2 cm}
+\begin{itemize}
+\item<2-> Agile: when a new area needs to be filled or an old package ceases to be maintained/liked, a new one can move in without historical constraints.
+
+\item<3-> Recognition: author of that package is highly visible.
+
+\item<4-> Prevents scope-creep: pressure for features outside the target area can be denied without guilt.
+
+\end{itemize}
+
+\column{0.5\linewidth}
+\underline{\large Disadvantages of small packages}
+
+\vspace{0.2 cm}
+\begin{itemize}
+\item<5-> Coordination: what if no one wants to cover a given target area?
+
+\item<6-> Coordination: what if everyone wants to cover the same target area?
+
+\item<7-> Coordination: what if packages in neighboring target areas can't share data?
+
+\item<8-> Communication: where do users get help solving problems that cross target areas?
+\end{itemize}
+
+\end{columns}
+\end{frame}
 
 \end{document}
