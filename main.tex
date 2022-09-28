@@ -216,9 +216,20 @@ From the PyHEP 2022 Slack:
 \end{columns}
 \end{frame}
 
+\begin{frame}{PyHEP talks about interfacing with ROOT}
+\begin{itemize}\setlength{\itemsep}{0.35 cm}
+\item Uhepp: Sharing plots in a self-contained format \hfill \textcolor{gray}{Frank Sauerburger}
+\item Lessons learned converting a production-grade Python CMS analysis to distributed RDataFrame \hfill \textcolor{gray}{Tommaso Tedeschi and Vincenzo Padulano}
+\item Awkward RDataFrame Tutorial \hfill \textcolor{gray}{Ianna Osborne}
+\item Enabling Dask Interoperability with XRootD Storage Systems \hfill \textcolor{gray}{Scott Demarest}
+\item Using C++ From Numba, Fast and Automatic \hfill \textcolor{gray}{Baidyanath Kundu}
+\item Pyhf to Combine Converter \hfill \textcolor{gray}{Petey Ridolfi}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{\mbox{ }}
 \Large
-But that doesn't mean that we {\it avoid} overlaps with ROOT or only bridge ROOT functionality to the outside world.
+But that doesn't mean that we {\it avoid} overlaps with ROOT or {\it only} bridge ROOT functionality to the outside world.
 
 \vspace{1 cm}
 \begin{uncoverenv}<2->
@@ -292,5 +303,211 @@ Download rates of Scikit-HEP packages (on Mac \& Windows: no batch jobs)
 
 \end{columns}
 \end{frame}
+
+\begin{frame}{Case study showing the worst and the best: histograms}
+\vspace{0.25 cm}
+NumPy, Matplotlib, Pandas, etc.\ can plot histograms, but not the way we need in particle physics: as fillable objects, with (negative) weights, error propagation, \ldots
+
+\vspace{0.5 cm}
+\uncover<2->{So we need to make our own histogram package. And it seems easy, right?}
+
+\vspace{0.5 cm}
+\uncover<3->{Physicists have created at least 20 histogram packages in Python, mostly single-author.}
+
+\vspace{0.5 cm}
+\begin{uncoverenv}<3->
+\begin{columns}
+\scriptsize
+\column{0.26\linewidth}
+\begin{itemize}
+\item PyROOT (2004--now)
+\item PAIDA (2004--2007)
+\item Plothon (2007--2008)
+\item SVGFig (2008--2009)
+\item YODA (2008--now)
+\end{itemize}
+
+\column{0.27\linewidth}
+\begin{itemize}
+\item DANSE (2009--2011)
+\item rootpy (2011--2019)
+\item SimpleHist (2011--2015)
+\item pyhistogram (2015)
+\item multihist (2015--now)
+\end{itemize}
+
+\column{0.28\linewidth}
+\begin{itemize}
+\item matplotlib-hep (2016)
+\item QHist (2017--2019)
+\item Physt (2016--now)
+\item \mbox{Histogrammar (2016--now)\hspace{-0.2 cm}}
+\item HistBook (2018--2019)
+\end{itemize}
+
+\column{0.32\linewidth}
+\begin{itemize}
+\item Coffea.hist (2019--2022)
+\item boost-histogram (2019--now)
+\item mplhep (2019--now)
+\item histoprint (2020--now)
+\item hist (2020--now)
+\end{itemize}
+
+\end{columns}
+\end{uncoverenv}
+\end{frame}
+
+\begin{frame}[fragile]{In Scikit-HEP, several packages converged to work together}
+\vspace{0.5 cm}
+\begin{columns}
+\column{0.6\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/histogram-convergence.pdf}
+
+\column{0.45\linewidth}
+Originally, each of these was developed independently by a single author.
+
+\vspace{0.75 cm}
+\begin{uncoverenv}<2->
+They each provide a piece of functionality users can get through
+
+\begin{minted}{python}
+import hist
+\end{minted}
+\end{uncoverenv}
+
+\vspace{0.75 cm}
+\uncover<3->{Now, 47 developers have contributed to these packages, and 20 contributed to more than one.}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Histogram proliferation and convergence}
+\large
+\vspace{0.25 cm}
+
+Number of unique developers contributing to each package per month (in git). Measures concentration of {\it developer activity}, not users.
+
+\vspace{0.1 cm}
+\includegraphics[width=\linewidth]{PLOTS/github-histogram-libraries.pdf}
+\end{frame}
+
+\begin{frame}{Now we define the interfaces: agreed-upon protocols}
+\vspace{0.5 cm}
+\begin{columns}
+\column{1.1\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/histogram-protocol-screenshot.png}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Addressing the disadvantages: developer coordination}
+\vspace{0.25 cm}
+IRIS-HEP Slack: $\sim$150 active members weekly, not all in IRIS-HEP, not all in HEP
+
+\vspace{0.25 cm}
+\begin{columns}
+\column{1.1\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/20220504-iris-hep-slack-analytics-members.png}
+\end{columns}
+
+\vspace{0.75 cm}
+GitHub: also very active.
+
+\vspace{0.25 cm}
+I need a visualization that demonstrates not just the volume, but the ``off-diagonal'' interactions between developers of different packages and between the particle physics community and the wider community.
+\end{frame}
+
+\begin{frame}{Addressing the disadvantages: user communication}
+\vspace{0.25 cm}
+The problem is that we have too many ways to answer questions from users.
+
+\vspace{0.25 cm}
+\begin{itemize}
+\item \textcolor{darkblue}{GitHub issues and discussions:} best so far, but distributed per-package
+\item \textcolor{darkblue}{Gitter:} low-barrier chat, but also per-package
+\item \textcolor{darkblue}{Mattermost:} CERN credentials are a barrier, but most LHC experiments are here
+\item \textcolor{darkblue}{Slack:} required invitation is a barrier; mostly developers, anyway
+\item \textcolor{darkblue}{StackOverflow:} good for cross-package discussions, but too diffuse in non-scientific world (when non-physicists answer questions, they're usually wrong)
+\item \textcolor{darkblue}{Scientific-Python.org Discourse and Discord:} options under consideration
+\end{itemize}
+
+\vspace{0.5 cm}
+We would benefit by converging on one and sending users to that one forum.
+\end{frame}
+
+\begin{frame}{PyHEP workshop evolved from developer-focus to user-focus}
+\Large
+\vspace{0.35 cm}
+
+\begin{columns}
+\column{0.5\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/pyhep-2018-photo.jpg}
+
+\column{0.5\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/pyhep-2021-photo.png}
+
+\end{columns}
+
+\vspace{0.1 cm}
+\begin{columns}
+\column{0.5\linewidth}
+\mbox{ } \hfill 2018 \hfill \mbox{ }
+
+\column{0.5\linewidth}
+\mbox{ } \hfill 2021 \hfill \mbox{ }
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Can you guess what happened?}
+\vspace{0.5 cm}
+
+\begin{columns}
+\column{1.07\linewidth}
+\includegraphics[height=5 cm]{PLOTS/pyhep-registration.pdf}\includegraphics[height=5 cm]{PLOTS/pyhep-2022-attended-before.pdf}
+\end{columns}
+
+\vspace{1 cm}
+\uncover<2->{By going virtual, we discovered a cohort of newcomers who can't/wouldn't travel.}
+\end{frame}
+
+\begin{frame}{About 20--40\% of the 1000 registrants attend/run the notebooks}
+\vspace{0.5 cm}
+
+\begin{columns}
+\column{1.1\linewidth}
+\includegraphics[width=\linewidth]{PLOTS/binder-launches-zoom-attendance.pdf}
+\end{columns}
+\end{frame}
+
+\begin{frame}{In addition, there's the HSF/IRIS-HEP software training}
+\vspace{1.25 cm}
+
+\mbox{\hspace{-0.75 cm}\includegraphics[width=\linewidth]{PLOTS/Training-Pyramid.png}}
+
+\vspace{-7.75 cm}
+\hfill \mbox{\includegraphics[width=4 cm]{PLOTS/instructor_mentor_small.jpg}\hspace{-1 cm}}
+\vspace{7.75 cm}
+\end{frame}
+
+\begin{frame}{Where are we as a community?}
+\Large
+
+Well, we're using Python for analysis a lot more.
+
+\vspace{1 cm}
+But more importantly, we're sharing (both ways) with the broader scientific community and making everything work together.
+\end{frame}
+
+\begin{frame}{My slide from Future Trends in Nuclear Physics Computing 2017}
+\vspace{0.5 cm}
+{\small\textcolor{blue}{\href{https://indico.jlab.org/event/213/contributions/2154/}{Lowering Boundaries between \\ Data Analysis Ecosystems}}, May 3, 2017}
+
+\vspace{-1 cm}
+\includegraphics[width=\linewidth]{PLOTS/separation.png}
+
+\vspace{-0.5 cm}
+Evaluating this today, I'd say {\bf the wall is down.}
+\end{frame}
+
 
 \end{document}
