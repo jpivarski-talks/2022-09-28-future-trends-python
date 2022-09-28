@@ -28,12 +28,12 @@
      showgrid="false"
      inkscape:lockguides="false"
      inkscape:zoom="1.5256083"
-     inkscape:cx="431.30336"
+     inkscape:cx="431.30337"
      inkscape:cy="276.93871"
      inkscape:window-width="2281"
      inkscape:window-height="1207"
      inkscape:window-x="279"
-     inkscape:window-y="205"
+     inkscape:window-y="177"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg4380" />
   <metadata
@@ -3123,13 +3123,24 @@
        x="373.12692"
        y="115.36395">&quot;import numpy&quot; in CMS repos</tspan><tspan
        sodipodi:role="line"
-       style="fill:#333333;fill-opacity:1;stroke-width:0.75"
+       style="font-size:12px;fill:#333333;fill-opacity:1;stroke-width:0.75"
        x="373.12692"
        y="130.36395"
-       id="tspan10224">scaled to the same years</tspan></text>
+       id="tspan1158">scaled to the same years</tspan></text>
   <path
      style="font-variation-settings:normal;opacity:1;fill:none;fill-opacity:1;stroke:#999999;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1L);stop-color:#000000;stop-opacity:1"
      d="m 528.96932,128.80108 39.32857,10.32375"
      id="path10289"
      sodipodi:nodetypes="cc" />
+  <text
+     xml:space="preserve"
+     style="font-size:12px;line-height:1.25;font-family:sans-serif;fill:#333333;fill-opacity:1;stroke-width:0.75"
+     x="373.12692"
+     y="143.86395"
+     id="text1216"><tspan
+       sodipodi:role="line"
+       style="font-size:9px;fill:#333333;fill-opacity:1;stroke-width:0.75"
+       x="373.12692"
+       y="143.86395"
+       id="tspan1214">(vertical scales have no relationship)</tspan></text>
 </svg>
